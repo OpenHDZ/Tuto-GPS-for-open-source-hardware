@@ -1,20 +1,23 @@
+// cordonnées de la ville d'Alger
 double lat_alg = 36.7596531;
 double lon_alg = 3.0665137;
 
+// cordonnées de la ville de Tamanrasset
 double lat_tam = 23.5891607;
 double lon_tam = 4.7637973;
 
+
 float distance=0.0;
 
-double calcule_distance(double old_lat, double old_lon, double new_lat, double new_lon)
+float calcule_distance(float old_lat, float old_lon, float new_lat, float new_lon)
 {
-  double latRad, lonRad;
-  double tlatRad, tlonRad;
-  double midLat, midLon;
-  double dist = 0.0;
+  float latRad, lonRad;
+  float tlatRad, tlonRad;
+  float midLat, midLon;
+  float dist = 0.0;
   
   
-  //convert decimal degree into radian
+  //convertion des valeures du degree vers le radian
   latRad = old_lat* 0.017453293;
   lonRad = old_lon* 0.017453293;
   tlatRad = new_lat * 0.017453293;
@@ -23,11 +26,13 @@ double calcule_distance(double old_lat, double old_lon, double new_lat, double n
   midLat = tlatRad - latRad;
   midLon = tlonRad - lonRad;
 
-  //Calculate the distance in KM
+  //Calcule de la distance en Km
   float latSin = sin((latRad - tlatRad)/2);
   float lonSin = sin((lonRad - tlonRad)/2);
+  
   dist = 2 * asin(sqrt((latSin*latSin) + cos(latRad) * cos(tlatRad) * (lonSin * lonSin)));
-  dist = dist * 6378.137;
+  
+  dist = dist * 6378.137; // pour la distance en Km il faut multiplier la valeure trouvée par le rayon de la terre
   
   return dist;
   
